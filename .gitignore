@@ -1,0 +1,48 @@
+# 依赖项
+node_modules/
+package-lock.json
+
+# 环境变量文件
+.env
+.env.*
+.sv-ssh.env
+.env.local
+.env.*.local
+
+# 构建产物
+dist/
+*.zip
+
+# 日志
+*.log
+logs/
+
+# 编辑器配置
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+
+# 测试相关
+coverage/
+
+# 其他临时文件
+.tmp/
+.cache/
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# sv-ssh配置文件
+sv-ssh-actions.js
+fdgdfgdfgdfg.js
+asdfasdfasdfasdf.env
+alksdjflkajsdf.js
+456.js
+ttt.env
+aaa.js

@@ -1,0 +1,63 @@
+{
+  "name": "sv-ssh",
+  "version": "0.1.0",
+  "description": "一个 Node.js 的 SSH 操作CLI工具,用于部署项目到服务器,支持自定义操作流程",
+  "author": "CcSimple <8400544@qq.com>",
+  "homepage": "https://github.com/CcSimple/sv-ssh",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CcSimple/sv-ssh.git"
+  },
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/cli.cjs",
+  "module": "dist/cli.cjs",
+  "bin": {
+    "sv-ssh": "dist/cli.cjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "sv-ssh",
+    "ssh",
+    "deploy",
+    "deployer"
+  ],
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "postbuild": "node -e \"require('fs').chmodSync('dist/cli.cjs', 0o755)\"",
+    "build": "rollup -c",
+    "pub": "npm --registry https://registry.npmjs.org/ publish --access public",
+    "test:init": "node src/cli.js init",
+    "test:run": "node src/cli.js run",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "commander": "^14.0.0",
+    "dotenv": "^17.2.1",
+    "inquirer": "^12.9.0",
+    "node-ssh": "^13.2.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.0",
+    "@babel/plugin-transform-runtime": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
+    "@babel/register": "^7.27.1",
+    "@babel/runtime": "^7.28.2",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^28.0.6",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-terser": "^0.4.4",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^9.32.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "prettier": "^3.6.2",
+    "rollup": "^2.79.2",
+    "rollup-plugin-delete": "^3.0.1"
+  }
+}
