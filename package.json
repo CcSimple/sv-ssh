@@ -1,6 +1,6 @@
 {
   "name": "sv-ssh",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "一个 Node.js 的 SSH 操作CLI工具,用于部署项目到服务器,支持自定义操作流程",
   "author": "CcSimple <8400544@qq.com>",
   "homepage": "https://github.com/CcSimple/sv-ssh",
