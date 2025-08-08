@@ -320,19 +320,19 @@ sv-ssh支持以下操作类型，可在sv-ssh-actions.js配置文件中定义：
 
 - **描述**: 执行自定义JavaScript函数
 - **参数**:
-  - `function`: 自定义异步函数，接收参数 (ssh, config, action, actionsConfig, previousOutput)
+  - `function`: 自定义异步函数，接收参数 (ssh, previousOutput, config, action, actionsConfig)
     - `ssh`: SSH2连接实例
+    - `previousOutput`: 前一步操作的输出结果
     - `config`: 配置对象，包含连接信息
     - `action`: 当前操作配置对象
     - `actionsConfig`: 所有操作配置数组
-    - `previousOutput`: 前一步操作的输出结果
 - **示例**:
 
 ```javascript
 {
   name: '自定义部署检查',
   type: 'custom',
-  function: async (ssh, config, action, actionsConfig, previousOutput) => {
+  function: async (ssh, previousOutput, config, action, actionsConfig) => {
     console.log('执行自定义健康检查...');
     const { stdout } = await ssh.execCommand('curl -s http://localhost/health');
     if (!stdout.includes('OK')) {

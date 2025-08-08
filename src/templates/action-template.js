@@ -81,8 +81,8 @@ export default [
   {
     name: '示例自定义操作',
     type: 'custom',
-    // 自定义操作函数，参数包括: ssh连接实例、配置、当前操作、所有操作配置、前一步输出
-    function: async (ssh, config, action, actionsConfig, previousOutput) => {
+    // 自定义操作函数，参数包括: ssh连接实例、前一步输出、配置、当前操作、所有操作配置
+    function: async (ssh, previousOutput, config, action, actionsConfig) => {
       console.log('执行自定义操作...');
       // 示例: 执行命令并返回结果
       const { stdout } = await ssh.execCommand('echo "自定义操作执行成功"');
