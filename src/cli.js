@@ -248,7 +248,10 @@ program
         ];
       }
       // 如果没有指定环境变量文件名，或者是默认值 .sv-ssh.env
-      if (!options.env || options.env === '.sv-ssh.env') {
+      if (
+        (!options.env || options.env === '.sv-ssh.env') &&
+        !program.args.includes('.sv-ssh.env')
+      ) {
         // 提示选择环境变量文件名
         const envChoices = fs
           .readdirSync('./')
@@ -259,18 +262,23 @@ program
           );
           process.exit(1);
         }
-        const { envFilename } = await inquirer.prompt([
-          {
-            type: 'list',
-            name: 'envFilename',
-            message: '请选择环境变量文件名:',
-            choices: envChoices,
-          },
-        ]);
-        options.env = envFilename;
+        if (envChoices.length > 1) {
+          const { envFilename } = await inquirer.prompt([
+            {
+              type: 'list',
+              name: 'envFilename',
+              message: '请选择环境变量文件名:',
+              choices: envChoices,
+            },
+          ]);
+          options.env = envFilename;
+        }
       }
       // 如果没有指定操作流程文件名，或者是默认值 sv-ssh-actions.js
-      if (!options.actions || options.actions === 'sv-ssh-actions.js') {
+      if (
+        (!options.actions || options.actions === 'sv-ssh-actions.js') &&
+        !program.args.includes('sv-ssh-actions.js')
+      ) {
         // 提示选择操作流程文件名
         // 获取操作流程文件选项并检查是否为空
         const actionChoices = fs
@@ -282,15 +290,17 @@ program
           );
           process.exit(1);
         }
-        const { actionsFilename } = await inquirer.prompt([
-          {
-            type: 'list',
-            name: 'actionsFilename',
-            message: '请选择操作流程文件名:',
-            choices: actionChoices,
-          },
-        ]);
-        options.actions = actionsFilename;
+        if (actionChoices.length > 1) {
+          const { actionsFilename } = await inquirer.prompt([
+            {
+              type: 'list',
+              name: 'actionsFilename',
+              message: '请选择操作流程文件名:',
+              choices: actionChoices,
+            },
+          ]);
+          options.actions = actionsFilename;
+        }
       }
       // 动态导入执行模块
       const { runActions } = await import('./ssh-runner.js');
