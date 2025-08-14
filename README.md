@@ -146,7 +146,7 @@ PRIVATE_KEY=/path/to/private/key
  * - copy: 服务器文件复制
  * - rename: 服务器文件重命名
  * - unzip: 服务器文件解压
- * - delete: 服务器文件删除
+ * - delete: 本地/服务器文件删除
  * - command: 执行服务器命令
  * - custom: 自定义操作函数
  */
@@ -303,6 +303,7 @@ sv-ssh支持以下操作类型，可在sv-ssh-actions.js配置文件中定义：
 
 - **描述**: 删除远程服务器文件
 - **参数**:
+  - `localDir`: 本地文件/目录路径
   - `remotePath`: 远程文件路径
 - **示例**:
 
@@ -310,6 +311,7 @@ sv-ssh支持以下操作类型，可在sv-ssh-actions.js配置文件中定义：
 {
   name: '清理临时文件',
   type: 'delete',
+  localDir: './dist/dist.zip',
   remotePath: '/var/www/app/source-v1.0.zip',
   options: { recursive: true, force: true }, // 是否递归删除，是否强制删除
   // 递归删除目录时，是否强制删除，默认false

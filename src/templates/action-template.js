@@ -75,6 +75,7 @@ export default [
   {
     name: '示例删除操作',
     type: 'delete',
+    localDir: './dist/dist.zip', // 本地文件路径
     remotePath: '/var/www/app/dist-v1.0.zip', // 服务器文件路径
     options: { recursive: true, force: true }, // 是否递归删除，是否强制删除
   },

@@ -165,6 +165,20 @@ async function runActions(options) {
 
           case 'delete':
             // 处理删除操作
+            // 删除本地文件/目录
+            if (action.localDir) {
+              // 判断是否是文件
+              if (fs.statSync(action.localDir).isFile()) {
+                // 删除文件
+                fs.unlinkSync(action.localDir);
+              } else {
+                // 删除目录
+                fs.rmSync(action.localDir, {
+                  recursive: action.options?.recursive || false,
+                  force: action.options?.force || false,
+                });
+              }
+            }
             // 通过参数判断是否递归删除
             // 通过参数是否强制删除
             await ssh.execCommand(
