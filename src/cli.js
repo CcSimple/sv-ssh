@@ -4,6 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import os from 'os';
 import { fileURLToPath } from 'url';
+import { runActions } from './ssh-runner.js';
 import { ACTION_TEMPLATE } from './templates/action-template.js';
 
 // 解决ES模块中的__dirname问题
@@ -302,8 +303,6 @@ program
           options.actions = actionsFilename;
         }
       }
-      // 动态导入执行模块
-      const { runActions } = await import('./ssh-runner.js');
       // 执行操作流程，传递配置参数
       await runActions(options);
     } catch (error) {
