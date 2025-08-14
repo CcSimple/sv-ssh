@@ -40,7 +40,14 @@ async function runActions(options) {
     // 动态导入指定的操作流程文件
     actionsPath = path.resolve(process.cwd(), actionsFile);
     console.log(`🔍 正在加载操作流程文件: ${actionsPath}`);
-    const actionsModule = await import(`${actionsPath}`);
+    // 读取文件内容并转换ES模块语法为CommonJS
+    const fileContent = fs
+      .readFileSync(actionsPath, 'utf8')
+      .replace(/export\s+default\s*/g, 'module.exports = ');
+    // 使用IIFE包装执行环境，避免污染全局作用域
+    const actionsModule = eval(
+      `(function(exports, module) { ${fileContent}; return module.exports || exports; })({}, {})`,
+    );
     actionsConfig = actionsModule.default || actionsModule;
     if (!Array.isArray(actionsConfig)) {
       throw new Error('操作流程文件必须导出一个数组');
